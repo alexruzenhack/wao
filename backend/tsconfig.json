@@ -10,6 +10,7 @@
     "sourceMap": true,
     "removeComments": true,
     "preserveConstEnums": true,
+    "typeRoots": ["./node_modules/@types", "./src/extensions"],
   },
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "**/*.spec.ts"],
 }
