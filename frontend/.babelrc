@@ -1,0 +1,9 @@
+{
+  "presets": ["@babel/env", "@babel/preset-react", "@babel/preset-typescript"],
+  "plugins": ["react-hot-loader/babel"],
+  "env": {
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
+  }
+}
