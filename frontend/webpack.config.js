@@ -12,6 +12,11 @@ module.exports = {
         loader: "babel-loader",
       },
       {
+        type: 'javascript/auto',
+        test: /\.mjs$/,
+        use: [],
+      },
+      {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
