@@ -45,7 +45,8 @@
     "react-dom": "16.14.0",
     "react-hot-loader": "4.13.0",
     "typescript": "4.1.5",
-    "urql": "^2.0.1"
+    "urql": "^2.0.1",
+    "wonka": "^4.0.15"
   },
   "prettier": {
     "tabWith": 2
