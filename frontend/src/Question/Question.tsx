@@ -3,7 +3,7 @@ import { View } from '@react-spectrum/view';
 import React from 'react';
 
 export function Question(props) {
-    const { question } = props;
+    const { content } = props;
     return (
         <View
             borderWidth="thin"
@@ -12,7 +12,7 @@ export function Question(props) {
             padding="size-250"
             backgroundColor="gray-100"
             >
-                <Content>{question}</Content>
+                <Content>{content}</Content>
         </View>
     );
 }
