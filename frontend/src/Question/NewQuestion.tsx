@@ -1,4 +1,4 @@
-import { Button } from '@adobe/react-spectrum';
+import { Button, StatusLight } from '@adobe/react-spectrum';
 import { TextArea } from '@react-spectrum/textfield';
 import { View } from '@react-spectrum/view';
 import gql from 'graphql-tag';
@@ -21,15 +21,22 @@ const QUESTIONING_MUTATION = gql`
 `;
 
 export function NewQuestion(props) {
-    let [value, setValue] = useState('');
+    let [question, setQuestion] = useState('');
+    let [showStatus, setShowStatus] = useState(false);
     let [questioningState, questioningMutation] = useMutation(QUESTIONING_MUTATION);
 
     const handleSend = useCallback(() => {
         if(!questioningState.fetching) {
-            const result = questioningMutation({content: value, authorId: '88c1a534-84b2-4c5c-a1f8-81844bfab895'});
-            result.then((response) => console.log('Operation result: ', response));
+            const result = questioningMutation({content: question, authorId: '88c1a534-84b2-4c5c-a1f8-81844bfab895'});
+            result.then((response) => {
+                setQuestion('');
+            });
+            setShowStatus(true);
+            setTimeout(() => {
+                setShowStatus(false);
+            }, 2000);
         }
-    }, [questioningState, questioningMutation, value]);
+    }, [questioningState, questioningMutation, question, setQuestion, setShowStatus]);
 
     return (
         <View
@@ -38,12 +45,16 @@ export function NewQuestion(props) {
             borderRadius="medium"
             padding="size-250"
             >
-            <TextArea value={value} onChange={setValue} 
+            <TextArea value={question} onChange={setQuestion} 
                 placeholder="What is your question?"
                 inputMode="text"
                 width="100%" />
             <Button onPress={handleSend}
+                isDisabled={questioningState.fetching}
                 variant="primary" marginTop="size-100" >Send</Button>
+            {(!!questioningState.data && showStatus) && 
+                <StatusLight variant="positive">Thank you! Question sent.</StatusLight>
+            }
         </View>
     );
 }
