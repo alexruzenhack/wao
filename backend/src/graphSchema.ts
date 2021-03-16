@@ -57,7 +57,7 @@ const resolvers = {
       });
     },
     allQuestions: (parent, args, ctx: Context) => {
-        return ctx.prisma.question.findMany();
+        return ctx.prisma.question.findMany({orderBy: {createdAt: 'desc'}});
     },
     findQuestion: (parent, args, ctx: Context) => {
         return ctx.prisma.question.findUnique({...args});
