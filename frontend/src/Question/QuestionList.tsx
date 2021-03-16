@@ -26,7 +26,7 @@ export function QuestionList(props) {
         <Flex direction="column"
                 gap="size-100"
                 alignContent="center">
-            { allQuestions.map(question => <Question {...question} />) }
+            { allQuestions.map(question => <Question key={question.id} {...question} />) }
         </Flex>
     );
 }

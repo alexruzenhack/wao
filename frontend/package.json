@@ -12,7 +12,7 @@
   "scripts": {
     "webpack": "webpack",
     "build": "webpack --mode development",
-    "start": "webpack-dev-server --mode development --open",
+    "start": "webpack-dev-server --mode development --hot --open",
     "test": "jest"
   },
   "devDependencies": {
