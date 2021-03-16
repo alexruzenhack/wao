@@ -2,10 +2,6 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import { Context } from './context';
 import  gql from 'graphql-tag';
 
-const event = {
-  NEW_QUESTION: "NEW_QUESTION"
-};
-
 const typeDefs = gql`
 type User {
   id: String
@@ -70,7 +66,6 @@ const resolvers = {
   Mutation: {
       questioning: (parent, args, ctx: Context) => {
         const newQuestion = ctx.prisma.question.create(args);
-        ctx.pubsub.publish(event.NEW_QUESTION, newQuestion);
         return newQuestion;
       },
       updateQuestion: (parent, args, ctx: Context) => {
