@@ -1,7 +1,10 @@
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { Context } from './context';
 import  gql from 'graphql-tag';
-import { argsToArgsConfig } from 'graphql/type/definition';
+
+const event = {
+  NEW_QUESTION: "NEW_QUESTION"
+};
 
 const typeDefs = gql`
 type User {
@@ -48,6 +51,10 @@ type Mutation {
     deleteQuestion(id: String): Boolean
 }
 
+type Subscription {
+  newQuestion: Question
+}
+
 `;
 
 const resolvers = {
@@ -66,7 +73,9 @@ const resolvers = {
   },
   Mutation: {
       questioning: (parent, args, ctx: Context) => {
-        return ctx.prisma.question.create(args);
+        const newQuestion = ctx.prisma.question.create(args);
+        ctx.pubsub.publish(event.NEW_QUESTION, newQuestion);
+        return newQuestion;
       },
       updateQuestion: (parent, args, ctx: Context) => {
         return ctx.prisma.question.update({
@@ -83,11 +92,26 @@ const resolvers = {
         } 
       },
   },
+  Subscription: {
+    newQuestion: {
+      subscribe: (parent, args, ctx: Context) => {
+        console.log('Testing subscription');
+        return ctx.pubsub.asyncIterator(event.NEW_QUESTION);
+      },
+      resolve: payload => payload
+    }
+  },
   Question: {
       author: (parent, args, ctx: Context) => {
           return ctx.prisma.question.findUnique({where: {id: parent.id}}).author();
       }, 
   },
+}
+
+export const roots = {
+  query: resolvers.Query,
+  mutation: resolvers.Mutation,
+  subscription: resolvers.Subscription
 }
 
 export const schema = makeExecutableSchema({
