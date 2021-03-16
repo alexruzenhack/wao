@@ -44,6 +44,7 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-hot-loader": "4.13.0",
+    "react-router-dom": "^5.2.0",
     "typescript": "4.1.5",
     "urql": "^2.0.1",
     "wonka": "^4.0.15"
