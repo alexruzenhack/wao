@@ -2,8 +2,9 @@ import { hot } from "react-hot-loader/root";
 import React, { Component } from "react";
 import {defaultTheme, Flex, Provider} from '@adobe/react-spectrum';
 import "./App.css";
-import { QuestionList } from "./Question/QuestionList";
-import { NewQuestion } from "./Question/NewQuestion";
+import { Switch, Route } from 'react-router-dom';
+import { QuestionsBoard } from "./Question/QuestionsBoard";
+
 
 class App extends Component {
   render() {
@@ -15,9 +16,9 @@ class App extends Component {
             gap="size-100"
             alignContent="center"
             >
-            <h1>Wrong Answers Only</h1>
-            <NewQuestion />
-            <QuestionList />
+            <Switch>
+              <Route exect path="/" component={QuestionsBoard} />
+            </Switch>
           </Flex>
         </div>
       </Provider>
