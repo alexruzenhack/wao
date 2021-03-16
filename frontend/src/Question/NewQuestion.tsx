@@ -13,9 +13,7 @@ const QUESTIONING_MUTATION = gql`
         }) {
             id
             content
-            author {
-            id
-            }
+            author { name }
         }
     }
 `;

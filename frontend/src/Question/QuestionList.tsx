@@ -4,7 +4,7 @@ import { Question } from './Question';
 import gql from 'graphql-tag';
 import { useQuery } from 'urql';
 
-const ALL_QUESTIONS = gql`
+export const ALL_QUESTIONS = gql`
 {
   allQuestions {
     id
