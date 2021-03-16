@@ -51,10 +51,6 @@ type Mutation {
     deleteQuestion(id: String): Boolean
 }
 
-type Subscription {
-  newQuestion: Question
-}
-
 `;
 
 const resolvers = {
@@ -92,26 +88,11 @@ const resolvers = {
         } 
       },
   },
-  Subscription: {
-    newQuestion: {
-      subscribe: (parent, args, ctx: Context) => {
-        console.log('Testing subscription');
-        return ctx.pubsub.asyncIterator(event.NEW_QUESTION);
-      },
-      resolve: payload => payload
-    }
-  },
   Question: {
       author: (parent, args, ctx: Context) => {
           return ctx.prisma.question.findUnique({where: {id: parent.id}}).author();
       }, 
   },
-}
-
-export const roots = {
-  query: resolvers.Query,
-  mutation: resolvers.Mutation,
-  subscription: resolvers.Subscription
 }
 
 export const schema = makeExecutableSchema({
