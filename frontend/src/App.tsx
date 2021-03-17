@@ -6,6 +6,7 @@ import { Switch, Route } from 'react-router-dom';
 import { QuestionsBoard } from "./Question/QuestionsBoard";
 import { Authentication } from "./Authentication/Authentication";
 import { PrivateRoute } from "./Routing/PrivateRoute";
+import { NewUser } from "./User/NewUser";
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
       <Provider theme={defaultTheme} colorScheme="light">
         <div className="App">
           <Switch>
+            <Route exect path="/signup" component={NewUser} />
             <Route exect path="/auth" component={Authentication} />
             <PrivateRoute exect path="/" component={QuestionsBoard} />
           </Switch>

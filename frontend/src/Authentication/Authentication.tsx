@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../Providers/UserProvider';
-import { NewUser } from '../User/NewUser';
 import { Redirect } from 'react-router-dom';
 
 export function Authentication(props) {
@@ -8,7 +7,7 @@ export function Authentication(props) {
     return (
         <>
             {!!!userState.user 
-             ? <NewUser />
+             ? <Redirect to='/signup' />
              : <Redirect to='/' />
             }
         </>
