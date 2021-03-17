@@ -6,6 +6,7 @@ import { Provider, Client, dedupExchange, fetchExchange } from 'urql'
 import { cacheExchange } from '@urql/exchange-graphcache'
 import { ALL_QUESTIONS } from "./Question/QuestionList";
 import { BrowserRouter as Router } from 'react-router-dom';
+import { UserProvider } from "./Providers/UserProvider";
 
 const cache = cacheExchange({
   updates: {
@@ -31,8 +32,10 @@ const client = new Client({
 
 ReactDOM.render(
     <Router>
-      <Provider value={client}>
-          <App />
-      </Provider>
+      <UserProvider>
+        <Provider value={client}>
+            <App />
+        </Provider>
+      </UserProvider>
     </Router>
 , document.getElementById("root"));
