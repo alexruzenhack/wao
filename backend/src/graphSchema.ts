@@ -41,10 +41,16 @@ input QuestionUpdateInput {
   content: String!
 }
 
+input NewUserInput {
+  name: String!
+  email: String!
+}
+
 type Mutation {
     questioning(data: QuestionInput): Question
     updateQuestion(id: String, data: QuestionUpdateInput): Question
     deleteQuestion(id: String): Boolean
+    newUser(data: NewUserInput!): User
 }
 
 `;
@@ -82,6 +88,9 @@ const resolvers = {
             return false;
         } 
       },
+      newUser: (parent, args, ctx: Context) => {
+        return ctx.prisma.user.create(args);
+      }
   },
   Question: {
       author: (parent, args, ctx: Context) => {
