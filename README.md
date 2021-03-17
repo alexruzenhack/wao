@@ -1,6 +1,8 @@
-# Wrong Answer Only
+# Wrong Answers Only
 
-Ask questions or answer with it wrong.
+Ask questions or answer it wrong.
+
+> The purpose of this project is to show some knowldge I have gained with GraphQL + Express + Prisma. There is also an HTTP REST API in the backend to address the Question domain, a simple CRUD, from which I have built the GraphQL service.
 
 # Dependencies
 
